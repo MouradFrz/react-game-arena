@@ -1,0 +1,74 @@
+@import url("https://fonts.googleapis.com/css2?family=Arvo:wght@400;700&display=swap");
+body {
+    background-color: #001a4d;
+}
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: "Arvo", serif;
+}
+.container {
+    width: 88%;
+    max-width: 1240px;
+    margin: auto;
+    height: 100vh;
+    display: flex;
+    align-items: center;
+}
+.game-window {
+    border: 10px solid #a3d6cc;
+    width: 100%;
+    height: 600px;
+    border-radius: 88% 12% 95% 5% / 12% 86% 14% 88%;
+    box-shadow: 2px -2px 138px 35px rgba(156, 102, 181, 1);
+    background-color: #eaeaea;
+}
+.tenzies {
+    height: 90%;
+    margin: 30px 90px 0px 50px;
+    .roll-count{
+        position: relative;
+        top: -20px;
+    }
+    p {
+        text-align: center;
+    }
+    .dice {
+        width: 30%;
+        min-width: 400px;
+        margin: auto;
+        display: flex;
+        flex-wrap: wrap;
+        gap: 30px;
+        justify-content: center;
+        padding: 50px 30px;
+        .die {
+            display: inline-block;
+            padding: 8px 14px;
+            border-radius: 88% 12% 96% 4% / 8% 88% 12% 92%;
+            border: 2px solid rgb(83, 83, 83);
+            font-weight: 700;
+            transition: 0.05s ease;
+            cursor: pointer;
+            &:hover {
+                background-color: #a3d6cc;
+                scale: 1.1;
+            }
+            &.held {
+                background-color: #92c5bb;
+            }
+        }
+    }
+    .reroll-center {
+        display: flex;
+        justify-content: center;
+        .reroll {
+            background-color: rgba(156, 102, 181, 1);
+            padding: 8px 14px;
+            color: white;
+            font-weight: 700;
+            cursor: pointer;
+        }
+    }
+}
