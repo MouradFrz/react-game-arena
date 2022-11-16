@@ -1,4 +1,6 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
+import Toastify from "toastify-js";
+import "toastify-js/src/toastify.css";
 
 function Tenzies(props) {
 	const generateNewDice = () => {
@@ -12,18 +14,27 @@ function Tenzies(props) {
 		}
 		return tempArray;
 	};
+
+	function initBestScore() {
+		return parseInt(localStorage.getItem("tenziesBestScore"))
+			? localStorage.getItem("tenziesBestScore")
+			: "/";
+	}
 	const [tenzies, setTenzies] = useState(false);
-    const [rollCount, setRollCount] = useState(0);
+	const [rollCount, setRollCount] = useState(0);
 	const [dice, setDice] = useState(generateNewDice);
-	const displayDice = dice.map((el) => (
-		<span
-			className={el.isHeld ? "die held" : "die"}
-			onClick={() => toggleHeld(el.id)}
-			key={el.id}
-		>
-			{el.number}
-		</span>
-	));
+	const [bestScore, setBestScore] = useState(initBestScore);
+	const displayDice = dice.map((el) => {
+		return (
+			<span
+				className={el.isHeld ? "die held" : "die"}
+				onClick={() => toggleHeld(el.id)}
+				key={el.id}
+			>
+				{el.number}
+			</span>
+		);
+	});
 	useEffect(() => {
 		const allHeld = dice.every((die) => die.isHeld);
 		const firstValue = dice[0].number;
@@ -32,6 +43,33 @@ function Tenzies(props) {
 			setTenzies(true);
 		}
 	}, [dice]);
+	useEffect(() => {
+		if (tenzies) {
+			setBestScore((old) => {
+				if (
+					!parseInt(localStorage.getItem("tenziesBestScore")) ||
+					rollCount < parseInt(localStorage.getItem("tenziesBestScore"))
+				) {
+					localStorage.setItem("tenziesBestScore", rollCount);
+					Toastify({
+						text: `You Won!\nNew best score!`,
+						duration: 3000,
+						backgroundColor: "#001a4d",
+						position: "center",
+					}).showToast();
+					return rollCount;
+				} else {
+					Toastify({
+						text: `You Won!`,
+						duration: 3000,
+						backgroundColor: "#001a4d",
+						position: "center",
+					}).showToast();
+				}
+				return old;
+			});
+		}
+	}, [tenzies]);
 	function toggleHeld(id) {
 		setDice((prev) => {
 			return prev.map((el) => {
@@ -42,7 +80,7 @@ function Tenzies(props) {
 
 	function reRoll() {
 		if (!tenzies) {
-            setRollCount(prev=>prev+1)
+			setRollCount((prev) => prev + 1);
 			setDice((prev) => {
 				return prev.map((el) =>
 					el.isHeld ? el : { ...el, number: Math.floor(Math.random() * 6) + 1 }
@@ -50,7 +88,8 @@ function Tenzies(props) {
 			});
 		} else {
 			setDice(generateNewDice);
-            setRollCount(0)
+			setRollCount(0);
+			setTenzies(false);
 		}
 	}
 	return (
@@ -59,12 +98,13 @@ function Tenzies(props) {
 			<p>The goal is to have all the dice on the same number.</p>
 			<p>Good luck</p>
 			<div className="dice">{displayDice}</div>
-            <p className="roll-count">Roll count : {rollCount}</p>
+			<p className="roll-count">Roll count : {rollCount}</p>
 			<div className="reroll-center">
 				<button className="reroll" onClick={reRoll}>
 					{tenzies ? "Restart" : "Reroll"}
 				</button>
 			</div>
+			<p style={{ marginTop: "20px" }}>Highest Score:{bestScore}</p>
 		</div>
 	);
 }
