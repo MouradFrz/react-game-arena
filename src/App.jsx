@@ -4,12 +4,13 @@ import GameLayout from "./layouts/GameLayout";
 import Home from "./pages/Home";
 import Tenzies from "./pages/Tenzies";
 import Snake from "./pages/Snake";
+import TenziesImage from "/public/game-images/tenzi.jpg"
 function App() {
 	const Games = [
 		{
 			name:"Tenzies",
 			path:"/tenzies",
-			image:"/public/game-images/tenzi.jpg",
+			image:TenziesImage,
 			id:0
 		},
 		{
