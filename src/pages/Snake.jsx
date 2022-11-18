@@ -66,7 +66,17 @@ function Snake(props) {
 			style={{
 				top: el[0] * 2 + "%",
 				left: el[1] * 2 + "%",
-				backgroundColor: index === 0 ? "#163805" : "rgb(105, 130, 33)",
+				background:
+					index===1 && direction === "up"
+					? "linear-gradient(0deg, rgba(78,106,24,1) 0%, rgba(22,56,5,1) 71%)"
+					: index===1 && direction === "down"
+					? "linear-gradient(180deg, rgba(78,106,24,1) 0%, rgba(22,56,5,1) 71%)"
+					: index===1 && direction === "left"
+					? "linear-gradient(270deg, rgba(78,106,24,1) 0%, rgba(22,56,5,1) 71%)"
+					: index===1 && direction === "right"
+					? "linear-gradient(90deg, rgba(78,106,24,1) 0%, rgba(22,56,5,1) 71%)"
+					: "", 
+					backgroundColor: index === 0 ? "#163805" : "#698221",
 				borderRadius:
 					!index && direction === "up"
 						? "50% 50% 0 0"

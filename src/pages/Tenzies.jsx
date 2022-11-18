@@ -104,7 +104,7 @@ function Tenzies(props) {
 					{tenzies ? "Restart" : "Reroll"}
 				</button>
 			</div>
-			<p style={{ marginTop: "20px" }}>Highest Score:{bestScore}</p>
+			<p style={{ marginTop: "20px" }}>Best Score:{bestScore}</p>
 		</div>
 	);
 }
