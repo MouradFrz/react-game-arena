@@ -9,13 +9,13 @@ function App() {
 		{
 			name:"Tenzies",
 			path:"/tenzies",
-			image:"/src/assets/game-images/tenzi.jpg",
+			image:"/public/game-images/tenzi.jpg",
 			id:0
 		},
 		{
 			name:"Snake Game",
 			path:"/snake",
-			image:"/src/assets/game-images/snake.jpg",
+			image:"/public/game-images/snake.jpg",
 			id:1
 		}
 	]
