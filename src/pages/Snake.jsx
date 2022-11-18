@@ -1,31 +1,49 @@
 import React, { useEffect, useRef, useState } from "react";
 import "../assets/Snake.scss";
+//Utility functions ---------------------------------------------------------------
+function initBestScore() {
+	return parseInt(localStorage.getItem("snakeBestScore"))
+		? localStorage.getItem("snakeBestScore")
+		: "/";
+}
+function generateFood() {
+	return [Math.floor(Math.random() * 49), Math.floor(Math.random() * 49)];
+}
+
 function Snake(props) {
 	const [snake, setSnake] = useState([
 		[24, 25],
 		[23, 25],
 	]);
-	function initBestScore() {
-		return parseInt(localStorage.getItem("snakeBestScore"))
-			? localStorage.getItem("snakeBestScore")
-			: "/";
-	}
+	//State and refs initializations
 	const [bestScore, setBestScore] = useState(initBestScore);
-	function generateFood() {
-		return [Math.floor(Math.random() * 49), Math.floor(Math.random() * 49)];
-	}
-
 	const [direction, setDirection] = useState("down");
 	const [food, setFood] = useState(generateFood());
 	const [score, setScore] = useState(0);
 	const [paused, setPaused] = useState(false);
 	const [speed, setSpeed] = useState(100);
-	const prevDirection = useRef("up");
-	const prevSpeed = useRef(speed);
 	const [gameState, setGameState] = useState("stopped");
-	useEffect(() => {
-		prevSpeed.current = speed;
-	}, [speed]);
+	const prevDirection = useRef("up");
+	// Edit the difficulty
+	function editDifficulty(level) {
+		switch (level) {
+			case "easy":
+				setSpeed(100);
+				return;
+			case "medium":
+				setSpeed(80);
+				return;
+			case "hard":
+				setSpeed(50);
+				return;
+			case "impossible":
+				setSpeed(30);
+				return;
+			default:
+				return;
+		}
+	}
+	//setting the best score each time the user loses a game
 	useEffect(() => {
 		if (gameState === "lost") {
 			setBestScore((old) => {
@@ -40,6 +58,7 @@ function Snake(props) {
 			});
 		}
 	}, [gameState]);
+	//displaying the snake cells
 	const displaySnake = snake.map((el, index) => (
 		<span
 			className="snake-element"
@@ -61,24 +80,7 @@ function Snake(props) {
 			}}
 		></span>
 	));
-	function editDifficulty(level) {
-		switch (level) {
-			case "easy":
-				setSpeed(100);
-				return;
-			case "medium":
-				setSpeed(80);
-				return;
-			case "hard":
-				setSpeed(50);
-				return;
-			case "impossible":
-				setSpeed(30);
-				return;
-			default:
-				return;
-		}
-	}
+	//Adding a square when the first snake cell meets a food cell
 	function addSquare() {
 		const lastElement = snake[snake.length - 1];
 		const beforeLastElement = snake[snake.length - 2];
@@ -114,6 +116,7 @@ function Snake(props) {
 			}
 		}
 	}
+	//Staring a new game
 	function restartGame() {
 		setSnake([
 			[24, 25],
@@ -125,6 +128,7 @@ function Snake(props) {
 		setGameState("playing");
 		setPaused(false);
 	}
+	//Binding the keys
 	useEffect(() => {
 		function handleKeyPress(ev) {
 			if (ev.isComposing || ev.keyCode === 40) {
@@ -147,10 +151,14 @@ function Snake(props) {
 		return () => window.removeEventListener("keydown", handleKeyPress);
 	}, []);
 	let changeInterval;
+	//The function that makes the snake move and refresh every second
 	useEffect(() => {
 		const handleDirectionChange = () => {
 			if (!paused) {
-				switch (direction) {
+				//makes sure the game isnt paused to move the snake
+				switch (
+					direction //which direction to move the snake
+				) {
 					case "right":
 						setSnake((old) => {
 							const newSnake = [];
@@ -200,6 +208,7 @@ function Snake(props) {
 				}
 			}
 		};
+		//Clears the setInterval when the game ends and starts it when it starts
 		if (gameState === "playing") {
 			handleDirectionChange();
 			changeInterval = setInterval(handleDirectionChange, speed);
@@ -209,27 +218,26 @@ function Snake(props) {
 		}
 		return () => clearInterval(changeInterval);
 	}, [direction, gameState, paused]);
+	//Pausing unpausing the game
 	function togglePause() {
 		if (gameState !== "playing") {
 			setPaused((prev) => !prev);
-			console.log(gameState);
 		}
 	}
+	//Checks if user lost (Hit himself or a border) on every snake movement
 	useEffect(() => {
 		const touching = snake.filter((el, index) => {
-			if (index !== 0) {
-				return el[0] === snake[0][0] && el[1] === snake[0][1];
-			}
-			return false;
+			return index !== 0
+				? el[0] === snake[0][0] && el[1] === snake[0][1]
+				: false;
 		}).length;
 		const outOfBoard =
 			snake[0][0] > 49 ||
 			snake[0][0] < 0 ||
 			snake[0][1] > 49 ||
 			snake[0][1] < 0;
-		if (touching || outOfBoard) {
-			setGameState("lost");
-		}
+		(touching || outOfBoard) && setGameState("lost");
+		//Eating the food
 		if (snake[0][0] === food[0] && snake[0][1] === food[1]) {
 			setScore((prev) => prev + 1);
 			setFood(generateFood);
