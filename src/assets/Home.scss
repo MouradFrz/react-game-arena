@@ -1,0 +1,36 @@
+.homepage{
+    margin-top: 60px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    .gamelist{
+        display:flex;
+        flex-wrap: wrap;
+        width: 80%;
+        margin-top: 30px;
+        gap: 40px;
+        .game{
+            text-decoration: none;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            .game-image{
+                width: 60px;
+                height: 60px;
+                border-radius: 14px;
+                border: 3px solid rgb(78, 78, 78);
+                object-fit: cover;
+            }
+            .game-title{
+                color: black;
+                max-width: 70px;
+                text-align: center;
+            }
+            &:hover{
+                .game-title{
+                    color: rgb(131, 155, 93);
+                }
+            }
+        }
+    }
+}

@@ -5,14 +5,28 @@ import Home from "./pages/Home";
 import Tenzies from "./pages/Tenzies";
 import Snake from "./pages/Snake";
 function App() {
-	const myRoutes = useRoutes([
+	const Games = [
 		{
-			path: "",
-			element: <Home />,
+			name:"Tenzies",
+			path:"/tenzies",
+			image:"./src/assets/game-images/tenzi.jpg",
+			id:0
 		},
+		{
+			name:"Snake Game",
+			path:"/snake",
+			image:"./src/assets/game-images/snake.jpg",
+			id:1
+		}
+	]
+	const myRoutes = useRoutes([
 		{
 			element: <GameLayout />,
 			children: [
+				{
+					path: "",
+					element: <Home games={Games}/>,
+				},
 				{
 					path: "/tenzies",
 					element: <Tenzies />,

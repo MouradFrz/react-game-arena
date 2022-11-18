@@ -1,7 +1,16 @@
 import React from 'react';
-
-function Home(props) {
-   return <h1>Homepage</h1>
+import '../assets/Home.scss'
+import GameIcon from '../components/GameIcon';
+function Home({games}) {
+   const displayGames = games.map(el=><GameIcon gameData={el} key={el.id}/>)
+   return (
+      <div className="homepage">
+         <h1>Game arena</h1>
+         <div className="gamelist">
+            {displayGames}
+         </div>
+      </div>
+   )
 }
 
 export default Home;

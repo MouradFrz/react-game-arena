@@ -23,10 +23,23 @@ body {
     border-radius: 88% 12% 95% 5% / 12% 86% 14% 88%;
     box-shadow: 2px -2px 138px 35px rgba(156, 102, 181, 1);
     background-color: #eaeaea;
+    position: relative;
+}
+.return-arrow {
+    color: black;
+    width: 60px;
+    height: 60px;
+    position: absolute;
+    top: 80px;
+    left: 60px;
+    transition: 0.07s ease;
+    &:hover {
+        color: gray;
+    }
 }
 .tenzies {
     margin: 100px 90px 0px 50px;
-    .roll-count{
+    .roll-count {
         position: relative;
         top: -20px;
     }
