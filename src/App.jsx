@@ -5,6 +5,7 @@ import Home from "./pages/Home";
 import Tenzies from "./pages/Tenzies";
 import Snake from "./pages/Snake";
 import TenziesImage from "/public/game-images/tenzi.jpg"
+import SnakeImage from "/public/game-images/snake.jpg"
 function App() {
 	const Games = [
 		{
@@ -16,7 +17,7 @@ function App() {
 		{
 			name:"Snake Game",
 			path:"/snake",
-			image:"/public/game-images/snake.jpg",
+			image:SnakeImage,
 			id:1
 		}
 	]
