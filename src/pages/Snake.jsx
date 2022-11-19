@@ -67,16 +67,16 @@ function Snake(props) {
 				top: el[0] * 2 + "%",
 				left: el[1] * 2 + "%",
 				background:
-					index===1 && direction === "up"
-					? "linear-gradient(0deg, rgba(78,106,24,1) 0%, rgba(22,56,5,1) 71%)"
-					: index===1 && direction === "down"
-					? "linear-gradient(180deg, rgba(78,106,24,1) 0%, rgba(22,56,5,1) 71%)"
-					: index===1 && direction === "left"
-					? "linear-gradient(270deg, rgba(78,106,24,1) 0%, rgba(22,56,5,1) 71%)"
-					: index===1 && direction === "right"
-					? "linear-gradient(90deg, rgba(78,106,24,1) 0%, rgba(22,56,5,1) 71%)"
-					: "", 
-					backgroundColor: index === 0 ? "#163805" : "#698221",
+					index === 1 && direction === "up"
+						? "linear-gradient(0deg, rgba(78,106,24,1) 0%, rgba(22,56,5,1) 71%)"
+						: index === 1 && direction === "down"
+						? "linear-gradient(180deg, rgba(78,106,24,1) 0%, rgba(22,56,5,1) 71%)"
+						: index === 1 && direction === "left"
+						? "linear-gradient(270deg, rgba(78,106,24,1) 0%, rgba(22,56,5,1) 71%)"
+						: index === 1 && direction === "right"
+						? "linear-gradient(90deg, rgba(78,106,24,1) 0%, rgba(22,56,5,1) 71%)"
+						: "",
+				backgroundColor: index === 0 ? "#163805" : "#698221",
 				borderRadius:
 					!index && direction === "up"
 						? "50% 50% 0 0"
@@ -92,39 +92,33 @@ function Snake(props) {
 	));
 	//Adding a square when the first snake cell meets a food cell
 	function addSquare() {
-		const lastElement = snake[snake.length - 1];
-		const beforeLastElement = snake[snake.length - 2];
-		let difference;
-		if (lastElement[0] === beforeLastElement[0]) {
-			difference = "horizontal";
-		} else {
-			difference = "vertical";
-		}
-		if (difference === "horizontal") {
-			if (lastElement[1] > beforeLastElement[1]) {
-				setSnake((prev) => [
-					...prev,
-					[prev[prev.length - 1][0], prev.length - 1][0] + 1,
-				]);
+		setSnake((prev) => {
+			if (prev[prev.length - 1][0] === prev[prev.length - 2][0]) {
+				if (prev[prev.length - 1][1] > prev[prev.length - 2][1]) {
+					return [
+						...prev,
+						[prev[prev.length - 1][0], prev[prev.length - 1][1] + 1],
+					];
+				} else {
+					return [
+						...prev,
+						[prev[prev.length - 1][0], prev[prev.length - 1][1] - 1],
+					];
+				}
 			} else {
-				setSnake((prev) => [
-					...prev,
-					[prev[prev.length - 1][0], prev.length - 1][0] - 1,
-				]);
+				if (prev[prev.length - 1][0] > prev[prev.length - 2][0]) {
+					return [
+						...prev,
+						[prev[prev.length - 1][0] + 1, prev[prev.length - 1][1]],
+					];
+				} else {
+					return [
+						...prev,
+						[prev[prev.length - 1][0] - 1, prev[prev.length - 1][1]],
+					];
+				}
 			}
-		} else {
-			if (lastElement[0] > beforeLastElement[0]) {
-				setSnake((prev) => [
-					...prev,
-					[prev[prev.length - 1][0] + 1, prev.length - 1][0],
-				]);
-			} else {
-				setSnake((prev) => [
-					...prev,
-					[prev[prev.length - 1][0] - 1, prev.length - 1][0],
-				]);
-			}
-		}
+		});
 	}
 	//Staring a new game
 	function restartGame() {
@@ -249,9 +243,9 @@ function Snake(props) {
 		(touching || outOfBoard) && setGameState("lost");
 		//Eating the food
 		if (snake[0][0] === food[0] && snake[0][1] === food[1]) {
+			addSquare();
 			setScore((prev) => prev + 1);
 			setFood(generateFood);
-			addSquare();
 		}
 	}, [snake]);
 
