@@ -3,9 +3,11 @@ import { useRoutes } from "react-router-dom";
 import GameLayout from "./layouts/GameLayout";
 import Home from "./pages/Home";
 import Tenzies from "./pages/Tenzies";
+import XO from "./pages/XO";
 import Snake from "./pages/Snake";
 import TenziesImage from "/public/game-images/tenzi.jpg";
 import SnakeImage from "/public/game-images/snake.jpg";
+import XOImage from "/public/game-images/xo.png";
 function App() {
 	const Games = [
 		{
@@ -20,6 +22,12 @@ function App() {
 			image: SnakeImage,
 			id: 1,
 		},
+		{
+			name: "XO",
+			path:"/x-o",
+			image: XOImage,
+			id:2,
+		}
 	];
 	const myRoutes = useRoutes([
 		{
@@ -36,6 +44,10 @@ function App() {
 				{
 					path: "/snake",
 					element: <Snake />,
+				},
+				{
+					path: "/x-o",
+					element: <XO />,
 				},
 			],
 		},

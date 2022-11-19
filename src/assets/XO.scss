@@ -1,0 +1,98 @@
+.xo-board {
+    width: 400px;
+    height: 400px;
+    display: flex;
+    flex-wrap: wrap;
+    .xo-cell {
+        cursor: pointer;
+        transition: 0.1s ease;
+        position: relative;
+        &.o-cell {
+            &::after {
+                content: "";
+                width: 60%;
+                height: 60%;
+                top: 50%;
+                left: 50%;
+                transform: translate(-50%, -50%);
+                border-radius: 50%;
+                border: 10px solid rgb(33, 33, 33);
+                position: absolute;
+            }
+        }
+        &.x-cell {
+            &::after,
+            &::before {
+                content: "";
+                width: 80%;
+                height: 10px;
+                top: 50%;
+                left: 50%;
+                transform-origin: center;
+                background-color: rgb(33, 33, 33);
+                position: absolute;
+            }
+            &::after {
+                transform: translate(-50%, -50%) rotate(45deg);
+            }
+            &::before {
+                transform: translate(-50%, -50%) rotate(-45deg);
+            }
+        }
+    }
+    .xo-cell:nth-child(2n + 1) {
+        background-color: rgb(194, 194, 194);
+        width: 33%;
+        height: 33.33%;
+        &:hover {
+            background-color: rgb(150, 150, 150);
+        }
+    }
+    .xo-cell:nth-child(2n) {
+        background-color: rgb(243, 243, 243);
+        width: 33%;
+        height: 33.33%;
+        &:hover {
+            background-color: rgb(218, 218, 218);
+        }
+    }
+}
+.xo-wrapper,.xo-menu-wrapper {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-top: 80px;
+    flex-direction: column;
+}
+.xo-menu-wrapper{
+    border: 1px solid black;
+    max-width: 500px;
+    margin: 80px auto 0px auto;
+    height: 400px;
+    display: flex;
+    .game-title{
+        font-size: 2.6rem;
+    }
+    .switch-signs{
+        border: none;
+        background-color: transparent;
+        text-decoration: underline;
+        margin: 0 3px;
+        cursor: pointer;
+        margin: 20px 0px;
+    }
+    .start-game{
+        background-color: #051138;
+        color: white;
+        padding: 8px 16px;
+        margin: 0 5px;
+        cursor: pointer;
+    }
+    .player-setting{
+        display: flex;
+        gap: 40px;
+        .sign{
+            font-weight: bold;
+        }
+    }
+}
