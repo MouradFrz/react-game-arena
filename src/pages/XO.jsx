@@ -90,145 +90,57 @@ function XO(props) {
 			});
 		});
 	}
+	const winCombination = [
+		[0, 1, 2],
+		[3, 4, 5],
+		[6, 7, 8],
+		[0, 3, 6],
+		[1, 4, 7],
+		[2, 5, 8],
+		[0, 4, 8],
+		[2, 4, 6],
+	];
+	function checkWin() {
+		let result = false;
+		winCombination.forEach((el) => {
+			if (
+				table[el[0]].value &&
+				table[el[1]].value &&
+				table[el[2]].value &&
+				table[el[0]].value === table[el[1]].value &&
+				table[el[1]].value === table[el[2]].value
+			) {
+				result = table[el[0]].value;
+			}
+		});
+		return result;
+	}
+	function fullSquaresCount() {
+		return table.filter((el) => el.value).length;
+	}
 	useEffect(() => {
-		if (
-			table[0].value &&
-			table[0].value === table[1].value &&
-			table[0].value === table[2].value
-		) {
-			setWinner(players.filter((el) => el.sign === table[0].value)[0].name);
+		console.log(fullSquaresCount());
+		const winner = checkWin();
+		if (winner) {
+			setWinner(players.filter((el) => el.sign === winner)[0].name);
 			setPlayers((prev) => {
 				return prev.map((el) => {
-					return el.name ===
-						players.filter((el) => el.sign === table[0].value)[0].name
+					return el.name === players.filter((el) => el.sign === winner)[0].name
 						? { ...el, winCount: el.winCount + 1 }
 						: el;
 				});
 			});
 			setGameState("won");
 			setTable(getNewTable());
+		} else {
+			if (fullSquaresCount() === 9) {
+				setGameState("won");
+				setWinner("");
+				setTable(getNewTable());
+			}
 		}
-		if (
-			table[0].value &&
-			table[0].value === table[3].value &&
-			table[0].value === table[6].value
-		) {
-			setWinner(players.filter((el) => el.sign === table[0].value)[0].name);
-			setPlayers((prev) => {
-				return prev.map((el) => {
-					return el.name ===
-						players.filter((el) => el.sign === table[0].value)[0].name
-						? { ...el, winCount: el.winCount + 1 }
-						: el;
-				});
-			});
-			setGameState("won");
-			setTable(getNewTable());
-		}
-		if (
-			table[0].value &&
-			table[0].value === table[4].value &&
-			table[0].value === table[8].value
-		) {
-			setWinner(players.filter((el) => el.sign === table[0].value)[0].name);
-			setPlayers((prev) => {
-				return prev.map((el) => {
-					return el.name ===
-						players.filter((el) => el.sign === table[0].value)[0].name
-						? { ...el, winCount: el.winCount + 1 }
-						: el;
-				});
-			});
-			setGameState("won");
-			setTable(getNewTable());
-		}
-		if (
-			table[3].value &&
-			table[3].value === table[4].value &&
-			table[3].value === table[5].value
-		) {
-			setWinner(players.filter((el) => el.sign === table[3].value)[0].name);
-			setPlayers((prev) => {
-				return prev.map((el) => {
-					return el.name ===
-						players.filter((el) => el.sign === table[3].value)[0].name
-						? { ...el, winCount: el.winCount + 1 }
-						: el;
-				});
-			});
-			setGameState("won");
-			setTable(getNewTable());
-		}
-		if (
-			table[6].value &&
-			table[6].value === table[7].value &&
-			table[6].value === table[8].value
-		) {
-			setWinner(players.filter((el) => el.sign === table[6].value)[0].name);
-			setPlayers((prev) => {
-				return prev.map((el) => {
-					return el.name ===
-						players.filter((el) => el.sign === table[6].value)[0].name
-						? { ...el, winCount: el.winCount + 1 }
-						: el;
-				});
-			});
-			setGameState("won");
-			setTable(getNewTable());
-		}
-		if (
-			table[1].value &&
-			table[1].value === table[4].value &&
-			table[1].value === table[7].value
-		) {
-			setWinner(players.filter((el) => el.sign === table[1].value)[0].name);
-			setPlayers((prev) => {
-				return prev.map((el) => {
-					return el.name ===
-						players.filter((el) => el.sign === table[1].value)[0].name
-						? { ...el, winCount: el.winCount + 1 }
-						: el;
-				});
-			});
-			setGameState("won");
-			setTable(getNewTable());
-		}
-		if (
-			table[2].value &&
-			table[2].value === table[5].value &&
-			table[2].value === table[8].value
-		) {
-			setWinner(players.filter((el) => el.sign === table[2].value)[0].name);
-			setPlayers((prev) => {
-				return prev.map((el) => {
-					return el.name ===
-						players.filter((el) => el.sign === table[2].value)[0].name
-						? { ...el, winCount: el.winCount + 1 }
-						: el;
-				});
-			});
-			setGameState("won");
-			setTable(getNewTable());
-		}
-		if (
-			table[2].value &&
-			table[2].value === table[4].value &&
-			table[2].value === table[6].value
-		) {
-			setWinner(players.filter((el) => el.sign === table[2].value)[0].name);
-			setPlayers((prev) => {
-				return prev.map((el) => {
-					return el.name ===
-						players.filter((el) => el.sign === table[2].value)[0].name
-						? { ...el, winCount: el.winCount + 1 }
-						: el;
-				});
-			});
-			setGameState("won");
-			setTable(getNewTable());
-		}
-		console.log(players);
 	}, [table]);
+
 	function startGame() {
 		setPlayers((prev) => {
 			return prev.map((el, index) => {
@@ -298,7 +210,7 @@ function XO(props) {
 		</div>
 	) : gameState === "won" ? (
 		<div className="xo-menu-wrapper">
-			<h1>{winner} Won !</h1>
+			{winner ? <h1>{winner} Won !</h1> : <h1>Its a tie!</h1>}
 			<p>
 				{players[0].name} {players[0].winCount} - {players[1].winCount}{" "}
 				{players[1].name}
@@ -307,7 +219,9 @@ function XO(props) {
 				<button className="start-game" onClick={restartGame}>
 					Restart
 				</button>
-				<button className="start-game" onClick={resetGame}>Reset Game</button>
+				<button className="start-game" onClick={resetGame}>
+					Reset Game
+				</button>
 			</div>
 		</div>
 	) : (
