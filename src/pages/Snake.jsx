@@ -77,7 +77,6 @@ function Snake(props) {
 						: index === 1 && direction === "right"
 						? "linear-gradient(90deg, rgba(78,106,24,1) 0%, rgba(22,56,5,1) 71%)"
 						: "linear-gradient(0deg, rgba(78,106,24,1) 0%, rgba(78,106,24,1) 71%)" ,
-				// backgroundColor: index === 0 ? "#163805" : "#698221",
 				borderRadius:
 					!index && direction === "up"
 						? "50% 50% 0 0"
@@ -132,6 +131,7 @@ function Snake(props) {
 		setScore(0);
 		setGameState("playing");
 		setPaused(false);
+		setFood(generateFood())
 	}
 	//Binding the keys
 	useEffect(() => {

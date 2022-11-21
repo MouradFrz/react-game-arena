@@ -5,9 +5,11 @@ import Home from "./pages/Home";
 import Tenzies from "./pages/Tenzies";
 import XO from "./pages/XO";
 import Snake from "./pages/Snake";
-import TenziesImage from "/public/game-images/tenzi.jpg";
-import SnakeImage from "/public/game-images/snake.jpg";
-import XOImage from "/public/game-images/xo.png";
+import CandyCrush from "./pages/CandyCrush";
+import TenziesImage from "/game-images/tenzi.jpg";
+import SnakeImage from "/game-images/snake.jpg";
+import XOImage from "/game-images/xo.png";
+import CandyCrushImage from "/game-images/candy-crush.webp";
 function App() {
 	const Games = [
 		{
@@ -24,10 +26,16 @@ function App() {
 		},
 		{
 			name: "XO",
-			path:"/x-o",
+			path: "/x-o",
 			image: XOImage,
-			id:2,
-		}
+			id: 2,
+		},
+		{
+			name: "Candy Crush",
+			path: "/candy-crush",
+			image: CandyCrushImage,
+			id: 3,
+		},
 	];
 	const myRoutes = useRoutes([
 		{
@@ -48,6 +56,10 @@ function App() {
 				{
 					path: "/x-o",
 					element: <XO />,
+				},
+				{
+					path: "/candy-crush",
+					element: <CandyCrush />,
 				},
 			],
 		},

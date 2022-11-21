@@ -1,0 +1,15 @@
+.candy-crush-wrapper{
+    width: 480px;
+    height: 480px;
+    margin: 0 auto 50px auto;
+    display: flex;
+    flex-wrap: wrap;
+    img{
+        width: 60px;
+        height: 60px;
+    }
+}
+.center-text{
+    text-align: center;
+    margin-top: 30px;
+}

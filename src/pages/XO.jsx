@@ -119,7 +119,6 @@ function XO(props) {
 		return table.filter((el) => el.value).length;
 	}
 	useEffect(() => {
-		console.log(fullSquaresCount());
 		const winner = checkWin();
 		if (winner) {
 			setWinner(players.filter((el) => el.sign === winner)[0].name);
