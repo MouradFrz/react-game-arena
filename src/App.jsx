@@ -6,10 +6,12 @@ import Tenzies from "./pages/Tenzies";
 import XO from "./pages/XO";
 import Snake from "./pages/Snake";
 import CandyCrush from "./pages/CandyCrush";
+import Tetris from "./pages/Tetris";
 import TenziesImage from "/game-images/tenzi.jpg";
 import SnakeImage from "/game-images/snake.jpg";
 import XOImage from "/game-images/xo.png";
 import CandyCrushImage from "/game-images/candy-crush.webp";
+import TetrisImage from "/game-images/Tetris-icon.png";
 function App() {
 	const Games = [
 		{
@@ -36,6 +38,12 @@ function App() {
 			image: CandyCrushImage,
 			id: 3,
 		},
+		{
+			name:"Tetris",
+			path: "/tetris",
+			image: TetrisImage,
+			id:4
+		}
 	];
 	const myRoutes = useRoutes([
 		{
@@ -61,6 +69,10 @@ function App() {
 					path: "/candy-crush",
 					element: <CandyCrush />,
 				},
+				{
+					path:"/tetris",
+					element:<Tetris/>
+				}
 			],
 		},
 	]);

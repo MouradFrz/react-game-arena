@@ -16,9 +16,8 @@ function GameLayout(props) {
 								width="16"
 								height="16"
 								fill="currentColor"
-								className	="bi bi-arrow-left"
+								className	="bi bi-arrow-left return-arrow"
 								viewBox="0 0 16 16"
-                                className="return-arrow"
 							>
 								<path
 									fillRule="evenodd"

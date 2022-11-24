@@ -1,0 +1,16 @@
+.tetris-container{
+    margin: 40px auto;
+    width: 320px;
+    height: 520px;
+    outline: 1px solid black;
+    position: relative;
+    overflow: hidden;
+    .square{
+        width: 40px;
+        height: 40px;
+        background-color: #db94ff;
+        border: 3px solid #864da4;
+        border-radius: 5px;
+        position: absolute;
+    }
+}
