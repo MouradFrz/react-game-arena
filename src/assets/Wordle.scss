@@ -1,0 +1,49 @@
+.wordle-wrapper {
+    width: 400px;
+    margin: 40px auto;
+    .try {
+        width: 100%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 5px;
+        padding: 5px;
+        border: 1px solid rgb(49, 49, 49);
+        .letter {
+            width: 19%;
+            aspect-ratio: 1;
+            background-color: rgb(49, 49, 49);
+            color: white;
+            font-size: 2rem;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            &.in-word {
+                background-color: rgb(204, 197, 121);
+                &.right-index {
+                    background-color: rgb(86, 145, 83);
+                }
+            }
+        }
+    }
+}
+.wordle-result-menu{
+    width: 500px;
+    border: 1px solid black;
+    aspect-ratio: 1;
+    margin: 40px auto;
+    div{
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        flex-direction: column;
+        height:100%;
+        gap: 20px;
+    }
+    .wordle-button{
+        background-color: #4dab1e;
+        color: white;
+        padding: 8px 18px;
+        cursor: pointer;
+    }
+}

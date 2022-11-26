@@ -12,6 +12,8 @@ import SnakeImage from "/game-images/snake.jpg";
 import XOImage from "/game-images/xo.png";
 import CandyCrushImage from "/game-images/candy-crush.webp";
 import TetrisImage from "/game-images/Tetris-icon.png";
+import WordleImage from "/game-images/wordle.png";
+import Wordle from "./pages/Wordle";
 function App() {
 	const Games = [
 		{
@@ -39,11 +41,17 @@ function App() {
 			id: 3,
 		},
 		{
-			name:"Tetris",
+			name: "Tetris",
 			path: "/tetris",
 			image: TetrisImage,
-			id:4
-		}
+			id: 4,
+		},
+		{
+			name: "Wordle",
+			path: "/wordle",
+			image: WordleImage,
+			id: 5,
+		},
 	];
 	const myRoutes = useRoutes([
 		{
@@ -70,9 +78,13 @@ function App() {
 					element: <CandyCrush />,
 				},
 				{
-					path:"/tetris",
-					element:<Tetris/>
-				}
+					path: "/tetris",
+					element: <Tetris />,
+				},
+				{
+					path: "/wordle",
+					element: <Wordle />,
+				},
 			],
 		},
 	]);
