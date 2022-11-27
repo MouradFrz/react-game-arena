@@ -41,6 +41,9 @@ function getNewTable() {
 	];
 }
 function XO(props) {
+	useEffect(()=>{
+		document.title="XO"
+	},[])
 	const [tour, setTour] = useState(["O", "X"][Math.floor(Math.random() * 2)]);
 	const [gameState, setGameState] = useState("choosing");
 	const [winner, setWinner] = useState("");

@@ -4,9 +4,17 @@
     margin: 0 auto 50px auto;
     display: flex;
     flex-wrap: wrap;
+    @media (max-width:600px) {
+        width: 320px;
+        height: 320px;
+    }
     img{
         width: 60px;
         height: 60px;
+        @media (max-width:600px) {
+            width: 40px;
+            height: 40px;
+        }
     }
 }
 .center-text{

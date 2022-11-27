@@ -25,6 +25,9 @@ const generateCurrentColors = () => {
 };
 
 const CandyCrush = (props) => {
+	useEffect(()=>{
+		document.title="Candy Crush"
+	},[])
 	const [currentColors, setCurrentColors] = useState(generateCurrentColors());
 	const [squareBeingDragged, setSquareBeingDragged] = useState(null);
 	const [squareBeingReplaced, setSquareBeingReplaced] = useState(null);

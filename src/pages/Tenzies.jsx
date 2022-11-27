@@ -3,6 +3,9 @@ import Toastify from "toastify-js";
 import "toastify-js/src/toastify.css";
 
 function Tenzies(props) {
+	useEffect(()=>{
+		document.title="Tenzies"
+	},[])
 	const generateNewDice = () => {
 		const tempArray = [];
 		for (let i = 0; i <= 9; i++) {

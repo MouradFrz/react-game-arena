@@ -31,6 +31,9 @@ function Wordle(props) {
 			}
 		}
 	}
+	useEffect(()=>{
+		document.title="Wordle"
+	},[])
 	useEffect(() => {
 		if (gameState === "playing") {
 			setAnswer(words[Math.floor(Math.random() * words.length)].toUpperCase());
@@ -118,6 +121,7 @@ function Wordle(props) {
 		</div>
 	) : (
 		<div className="wordle-result-menu">
+			
 			{gameState === "won" ? (
 				<div>
 					<h1>Won!</h1>

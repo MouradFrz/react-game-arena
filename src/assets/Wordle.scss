@@ -1,6 +1,10 @@
 .wordle-wrapper {
     width: 400px;
     margin: 40px auto;
+    @media (max-width:760px){
+        width: 300px;
+        margin: 80px auto;
+    }
     .try {
         width: 100%;
         display: flex;
@@ -10,14 +14,18 @@
         padding: 5px;
         border: 1px solid rgb(49, 49, 49);
         .letter {
-            width: 19%;
-            aspect-ratio: 1;
+            width: 80px;
+            height: 70px;
             background-color: rgb(49, 49, 49);
             color: white;
             font-size: 2rem;
             display: flex;
             justify-content: center;
             align-items: center;
+            @media (max-width:760px){
+                width: 60px;
+                height: 50px;
+            }
             &.in-word {
                 background-color: rgb(204, 197, 121);
                 &.right-index {

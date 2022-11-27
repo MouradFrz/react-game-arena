@@ -33,12 +33,17 @@ body {
     top: 80px;
     left: 60px;
     transition: 0.07s ease;
+    @media (max-width:760px){
+        width: 30px;
+        left: 20px;
+        top: 40px;
+    }
     &:hover {
         color: gray;
     }
 }
 .tenzies {
-    margin: 100px 90px 0px 50px;
+    margin: 100px auto;
     .roll-count {
         position: relative;
         top: -20px;
@@ -53,6 +58,11 @@ body {
         display: flex;
         flex-wrap: wrap;
         gap: 30px;
+        @media (max-width:700px) {
+            gap: 10px;
+            min-width: 300px;
+            padding: 50px 10px;
+        }
         justify-content: center;
         padding: 50px 30px;
         .die {

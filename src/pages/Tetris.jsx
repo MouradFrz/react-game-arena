@@ -2,6 +2,9 @@ import React, { useState, useEffect } from "react";
 import "../assets/Tetris.scss";
 import TetrisSquare from "../components/TetrisSquare";
 function generateRandomShape() {
+	useEffect(()=>{
+		document.title="Tetris"
+	},[])
 	const shapes = [
 		{
 			type: 1,

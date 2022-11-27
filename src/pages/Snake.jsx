@@ -11,6 +11,9 @@ function generateFood() {
 }
 
 function Snake(props) {
+	useEffect(()=>{
+		document.title="Snake"
+	},[])
 	const [snake, setSnake] = useState([
 		[24, 25],
 		[23, 25],
