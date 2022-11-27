@@ -1,12 +1,23 @@
-import React from "react";
+import React, { useEffect, useRef } from "react";
 import { Outlet, useLocation, Link } from "react-router-dom";
 import "../assets/GameLayout.scss";
 
 function GameLayout(props) {
 	const currentPageInfo = useLocation();
 	const showReturn = currentPageInfo.pathname !== "/";
+	const toggleButton = useRef();
+	const copyRef = useRef();
+	useEffect(() => {
+		const toggleFunction = () => {
+			copyRef.current.classList.toggle("visible");
+		};
+		toggleButton.current.addEventListener("click", toggleFunction);
+		return () => {
+			toggleButton.current.removeEventListener("click", toggleFunction);
+		};
+	}, []);
 	return (
-		<div>
+		<div className="global-wrapper">
 			<div className="container">
 				<div className="game-window">
 					{showReturn ? (
@@ -16,7 +27,7 @@ function GameLayout(props) {
 								width="16"
 								height="16"
 								fill="currentColor"
-								className	="bi bi-arrow-left return-arrow"
+								className="bi bi-arrow-left return-arrow"
 								viewBox="0 0 16 16"
 							>
 								<path
@@ -30,6 +41,10 @@ function GameLayout(props) {
 					)}
 					<Outlet />
 				</div>
+			</div>
+			<div ref={copyRef} className="copyright">
+				<button ref={toggleButton}>&#8656;</button>
+				<p>© 2022 Yaou Mourad - All Rights Reserved.</p>
 			</div>
 		</div>
 	);

@@ -94,5 +94,35 @@ body {
         }
     }
 }
-
-
+.global-wrapper{
+    position: relative;
+    overflow-x: hidden;
+    .copyright{
+        position: absolute;
+        background-color: #92c5bb;
+        top: 0;
+        left: 100%;
+        transform: translate(-40px,0px);
+        display: flex;
+        transition: 0.1s ease;
+        &.visible{
+            transform: translate(-100%,0px);
+            button{
+                transform:rotate(180deg)
+            }
+        }
+        button{
+            transition: 0.1s ease;
+            width: 40px;
+            cursor: pointer;
+            font-weight: 700;
+            border: none;
+            padding: 5px 0;
+        }
+        p{
+            width: 350px;
+            font-weight: 700;
+            padding: 4px 0 0 10px;
+        }
+    }
+}
