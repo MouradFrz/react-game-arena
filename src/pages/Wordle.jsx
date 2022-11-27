@@ -3,6 +3,7 @@ import Try from "../components/Try";
 import "../assets/Wordle.scss";
 import Toastify from "toastify-js";
 import "toastify-js/src/toastify.css";
+import words from "../wordleData.json";
 
 function Wordle(props) {
 	const [gameState, setGameState] = useState("playing");
@@ -31,25 +32,10 @@ function Wordle(props) {
 		}
 	}
 	useEffect(() => {
-		const options = {
-			method: "GET",
-			headers: {
-				"X-RapidAPI-Key": "810f02213fmsh13ae6207e2586cap1f0d1ajsn16db7d642ff6",
-				"X-RapidAPI-Host": "wordle-answers-solutions.p.rapidapi.com",
-			},
-		};
-		fetch("https://wordle-answers-solutions.p.rapidapi.com/answers", options)
-			.then((response) => response.json())
-			.then((response) => {
-				const toReturn = [];
-				response.data.forEach((el, i) => {
-					toReturn.push(el.answer);
-				});
-				setAnswer(toReturn[Math.floor(Math.random() * toReturn.length)]);
-				setAllAnswers(toReturn);
-			})
-			.catch((err) => console.error(err));
-	}, []);
+		if (gameState === "playing") {
+			setAnswer(words[Math.floor(Math.random() * words.length)].toUpperCase());
+		}
+	}, [gameState]);
 	useEffect(() => {
 		function handleEnter(ev) {
 			if (ev.isComposing || ev.keyCode === 13) {
@@ -59,8 +45,8 @@ function Wordle(props) {
 					} else {
 						if (
 							tries[i].word.length === 5 &&
-							allAnswers.includes(
-								document.querySelector("#hidden-input").value.toUpperCase()
+							words.includes(
+								document.querySelector("#hidden-input").value.toLowerCase()
 							)
 						) {
 							setTries((prev) =>
@@ -78,8 +64,8 @@ function Wordle(props) {
 								setGameState("won");
 							}
 							const tryCount = tries.filter((el) => el.word !== "").length;
-							if(tryCount===6){
-								setGameState("lost")
+							if (tryCount === 6) {
+								setGameState("lost");
 							}
 							document.querySelector("#hidden-input").value = "";
 						} else {
@@ -113,10 +99,11 @@ function Wordle(props) {
 			{ isConfirmed: false, word: "" },
 		]);
 		setGameState("playing");
-		setAnswer(allAnswers[Math.floor(Math.random() * allAnswers.length)]);
+		setAnswer(words[Math.floor(Math.random() * words.length)]);
 	}
 	return gameState === "playing" ? (
 		<div className="wordle-wrapper">
+			{answer}
 			{tries.map((el, i) => {
 				return <Try item={el} key={i} answer={answer} />;
 			})}
