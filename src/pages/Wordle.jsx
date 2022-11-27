@@ -103,7 +103,6 @@ function Wordle(props) {
 	}
 	return gameState === "playing" ? (
 		<div className="wordle-wrapper">
-			{answer}
 			{tries.map((el, i) => {
 				return <Try item={el} key={i} answer={answer} />;
 			})}
