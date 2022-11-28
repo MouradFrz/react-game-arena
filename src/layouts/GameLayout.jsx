@@ -44,7 +44,7 @@ function GameLayout(props) {
 			</div>
 			<div ref={copyRef} className="copyright">
 				<button ref={toggleButton}>&#8656;</button>
-				<p>© 2022 Yaou Mourad - All Rights Reserved.</p>
+				<p>© 2022 <a href="https://www.linkedin.com/in/mourad-yaou/">Yaou Mourad</a> - All Rights Reserved.</p>
 			</div>
 		</div>
 	);
