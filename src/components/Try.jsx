@@ -15,6 +15,7 @@ function Try({ item, answer }) {
 						? "letter in-word" 
 						: "letter"
 				}
+				key={i}
 			>
 				{char ? char.toUpperCase() : ""}
 			</div>

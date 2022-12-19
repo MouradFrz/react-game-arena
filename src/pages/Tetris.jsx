@@ -1,10 +1,9 @@
 import React, { useState, useEffect } from "react";
 import "../assets/Tetris.scss";
 import TetrisSquare from "../components/TetrisSquare";
+
 function generateRandomShape() {
-	useEffect(()=>{
-		document.title="Tetris"
-	},[])
+
 	const shapes = [
 		{
 			type: 1,
@@ -61,13 +60,13 @@ function generateRandomShape() {
 }
 const SS = 40;
 function Tetris(props) {
+	useEffect(()=>{
+		document.title="Tetris"
+	},[])
 	const [currentShape, setCurrentShape] = useState(generateRandomShape());
 	const [currentTable, setCurrentTable] = useState([]);
 	useEffect(() => {
 		function handleKeyPress(ev) {
-			if (ev.isComposing || ev.keyCode === 38) {
-				prevDirection.current !== "down" && setDirection("up");
-			}
 			if (ev.isComposing || ev.keyCode === 37) {
 				const testLeft = currentShape.squares.filter((el) => {
 					return currentTable.filter((tableEl) => {
@@ -90,7 +89,6 @@ function Tetris(props) {
 			}
 			if (ev.isComposing || ev.keyCode === 39) {
 				const testRight = currentShape.squares.filter((el) => {
-					console.log(currentTable);
 					return currentTable.filter((tableEl) => {
 						return tableEl.x - 40 === el.x && tableEl.y === el.y;
 					}).length;
@@ -167,12 +165,13 @@ function Tetris(props) {
 					<div
 						className="square"
 						style={{ left: `${el.x}px`, bottom: `${el.y}px` }}
+						key={i}
 					></div>
 				);
 			})}
 			{currentTable.map((el, i) => {
 				return (
-                    <TetrisSquare left={el.x} bottom={el.y} />
+                    <TetrisSquare left={el.x} bottom={el.y} key={i} />
 				);
 			})}
 		</div>
